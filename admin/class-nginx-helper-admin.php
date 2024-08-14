@@ -170,6 +170,10 @@ class Nginx_Helper_Admin {
 	 */
 	public function nginx_helper_admin_menu() {
 
+		if (defined('PRESS_CACHE_OPTIONS')) {
+			return;
+		}
+
 		if ( is_multisite() ) {
 
 			add_submenu_page(
@@ -289,14 +293,18 @@ class Nginx_Helper_Admin {
 	 */
 	public function nginx_helper_settings() {
 
-		$options = get_site_option(
+		if (defined('PRESS_CACHE_OPTIONS')) {
+			$options = json_decode( PRESS_CACHE_OPTIONS, true );
+		} else {
+			$options = get_site_option(
 			'rt_wp_nginx_helper_options',
 			array(
 				'redis_hostname' => '127.0.0.1',
 				'redis_port'     => '6379',
 				'redis_prefix'   => 'nginx-cache:',
-			)
-		);
+				)
+			);
+		}
 
 		$data = wp_parse_args(
 			$options,
