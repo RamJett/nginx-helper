@@ -39,7 +39,7 @@ if ( ! defined( 'NGINX_HELPER_BASENAME' ) ) {
  * Base PATH of plugin
  */
 if ( ! defined( 'NGINX_HELPER_BASEPATH' ) ) {
-	define( 'NGINX_HELPER_BASEPATH', plugin_dir_path( __FILE__ ) );
+	define( 'NGINX_HELPER_BASEPATH', plugin_dir_path( __FILE__ ) . 'nginx-helper/' );
 }
 
 /**
