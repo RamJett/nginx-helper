@@ -362,7 +362,12 @@ class Nginx_Helper_Admin {
 	 */
 	public function is_nginx_log_enabled() {
 
-		$options = get_site_option( 'rt_wp_nginx_helper_options', array() );
+		if (defined('PRESS_CACHE_OPTIONS') {
+			$options = json_decode( PRESS_CACHE_OPTIONS, true );
+		} else {
+
+			$options = get_site_option( 'rt_wp_nginx_helper_options', array() );
+		}
 
 		if ( ! empty( $options['enable_log'] ) && 1 === (int) $options['enable_log'] ) {
 			return true;
