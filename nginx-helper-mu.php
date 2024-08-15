@@ -39,8 +39,29 @@ if ( ! defined( 'NGINX_HELPER_BASENAME' ) ) {
  * Base PATH of plugin
  */
 if ( ! defined( 'NGINX_HELPER_BASEPATH' ) ) {
-	define( 'NGINX_HELPER_BASEPATH', plugin_dir_path( __FILE__ ) . 'nginx-helper/' );
+	define( 'NGINX_HELPER_BASEPATH', plugin_dir_path( __FILE__ ) );
 }
+
+/**
+ * The code that runs during plugin activation.
+ * This action is documented in includes/class-nginx-helper-activator.php
+ */
+function activate_nginx_helper() {
+	require_once NGINX_HELPER_BASEPATH . 'includes/class-nginx-helper-activator.php';
+	Nginx_Helper_Activator::activate();
+}
+
+/**
+ * The code that runs during plugin deactivation.
+ * This action is documented in includes/class-nginx-helper-deactivator.php
+ */
+function deactivate_nginx_helper() {
+	require_once NGINX_HELPER_BASEPATH . 'includes/class-nginx-helper-deactivator.php';
+	Nginx_Helper_Deactivator::deactivate();
+}
+
+//register_activation_hook( __FILE__, 'activate_nginx_helper' );
+//register_deactivation_hook( __FILE__, 'deactivate_nginx_helper' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -62,14 +83,6 @@ function run_nginx_helper() {
 	global $nginx_helper;
 
 	$nginx_helper = new Nginx_Helper();
-
-	$path = $nginx_helper_admin->functional_asset_path();
-
-	// Since must-use plugin. We never activate so the activate_nginx_helper never gets ran.
-	if ( ! is_dir( $path ) ) {
-		mkdir( $path );
-	}
-
 	$nginx_helper->run();
 
 	// Load WP-CLI command.
