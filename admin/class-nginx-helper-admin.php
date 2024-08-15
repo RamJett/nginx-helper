@@ -389,6 +389,10 @@ class Nginx_Helper_Admin {
 
 		$log_path = WP_CONTENT_DIR . '/uploads/nginx-helper/';
 
+		if ( ! is_dir( $log_path ) ) {
+			mkdir( $log_path );
+		}
+
 		return apply_filters( 'nginx_asset_path', $log_path );
 
 	}
@@ -402,6 +406,10 @@ class Nginx_Helper_Admin {
 	public function functional_asset_url() {
 
 		$log_url = WP_CONTENT_URL . '/uploads/nginx-helper/';
+
+		if ( ! is_dir( $log_url ) ) {
+			mkdir( $log_url );
+		}
 
 		return apply_filters( 'nginx_asset_url', $log_url );
 
