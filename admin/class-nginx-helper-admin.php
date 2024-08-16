@@ -207,6 +207,10 @@ class Nginx_Helper_Admin {
 	 */
 	public function nginx_helper_toolbar_purge_link( $wp_admin_bar ) {
 
+		if (defined('PRESS_CACHE_OPTIONS')) {
+			return;
+		}
+
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
