@@ -21,6 +21,12 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+// If not configured with PRESS_CACHE_OPTIONS
+if ( ! defined( 'PRESS_CACHE_OPTIONS' ) ) {
+	error_log( 'PRESS_CACHE_OPTIONS not configured. Not running nginx-helper.', 0 );
+	return;
+}
+
 /**
  * Base URL of plugin
  */
