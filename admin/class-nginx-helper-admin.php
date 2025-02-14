@@ -338,8 +338,6 @@ class Nginx_Helper_Admin {
 			$options = json_decode( PRESS_CACHE_OPTIONS, true );
 		} else {
 			$options = get_site_option(
-		
-		$options = get_site_option(
 			'rt_wp_nginx_helper_options',
 			array(
 				'redis_hostname' => '127.0.0.1',
@@ -349,9 +347,6 @@ class Nginx_Helper_Admin {
 			);
 		}
 
-				'redis_database' => 0,
-			)
-		);
 		
 		$data = wp_parse_args(
 			$options,
